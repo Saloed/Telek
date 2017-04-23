@@ -1,0 +1,192 @@
+\include{settings}
+
+\setcounter{tocdepth}{3}
+
+\begin{document}	% начало документа
+
+% Титульная страница
+\include{titlepage}
+
+% Содержание
+\include{ToC}
+
+
+\section{Цель работы}
+Изучение частотной и фазовой модуляции и демодуляции сигналов.
+\section{Постановка задачи}
+\begin{enumerate}
+\item  сгенерировать однотональный сигнал низкой частоты 
+\item  выполнить фазовую модуляцию и демодуляцию 
+\item  выполнить частотную модуляцию и демодуляцию 
+\item  получить спектр модулированного сигнала
+\end{enumerate}
+
+\section{Теоретическая информация}
+
+\subsection{Модуляция}
+Модуляция --- это перенос спектра сигналов из низкочастотной области на заданную частоту. 
+Это применяется для передачи сигнала в заданном частотном диапазоне.
+Для модулирующего (исходного) сигнала $ S(t) $ в канале связи для передачи формируется  вспомогательный периодический высокочастотный сигнал $u(t)=f(t, [a_1,   a_2,   ...   a_m])$. Параметры $a_i$ определяют форму сигнала. 
+При модуляции исходный сигнал $S(t)$ переносят на один из параметров $a_i$, форма сигнала $u(t)$ (несущей) изменяется и 
+служит для переноса информации, содержащейся в сигнале $S(t)$. Обратная операция выделения сигнала $S(t)$ из 
+модулированного сигнала $u(t)$ называется демодуляция.
+
+\subsection{Однотональный сигнал}
+
+Для генерации гармонического сигнала можно воспользоваться формулой\\ $signal = A*cos(2*\pi * f*t + \varphi)$,
+ где $ A $ --- амплитуда сигнала, $f$ --- частота, $t$ --- вектор отсчетов времени, $\varphi$ --- смещение по фазе.
+
+\subsection{Угловая модуляция}
+
+При угловой модуляции в несущем гармоническом колебании $u(t) = U_m cos(\omega t + \varphi)$ 
+ значение амплитуды колебаний $U_m$ остается постоянным, а информация $s(t)$ переносится либо на частоту $\omega$, 
+ либо на фазовый угол $\varphi$. В обоих случаях текущее значение фазового угла гармонического 
+ колебания $u(t)$ определяет аргумент $\psi (t) = \omega t + \varphi$ ,
+  который называется полной фазой колебания.
+
+\subsubsection{Фазовая модуляция}
+При фазовой модуляции модулирующий сигнал определяет фазу несущего колебания
+$\phi(t) = k s(t)$. Сигнал с фазовой модуляцией имеет вид 
+\begin{equation}
+    u(t) = U_m \cos(\omega_0 t + k s(t))
+\end{equation}
+
+
+Изображение сигнала после фазовой модуляции приведено ниже на рис.~\ref{pic:Phase_mod_theor} :
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{Phase_mod_theor}
+		\caption{Фазовая модуляция сигнала} 
+		\label{pic:Phase_mod_theor} % название для ссылок внутри кода
+	\end{center}
+\end{figure}
+
+
+\subsubsection{Частотная модуляция}
+
+При частотной модуляции модулирующий сигнал определяет частоту несущего колебания.
+Сигнал с частотной модуляцией имеет вид  
+\begin{equation}
+	u(t) = U_m cos(\omega_0 t + k \int_{0}^{t} s(t) dt)
+\end{equation}
+Изображение сигнала после частотной модуляции приведено на рис.~\ref{pic:Freq_mod_theor} :
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{Freq_mod_theor}
+		\caption{Частотная модуляция сигнала} 
+		\label{pic:Freq_mod_theor} % название для ссылок внутри кода
+	\end{center}
+\end{figure}
+
+
+
+\section{Ход работы}
+Код, написанный во время работы приведён в листинге~\ref{code:code_1}. 
+
+\subsection{Генерация однотонального сигнала}
+Получим обычный гармонический сигнал  $s(t) = A*cos(2*\pi * f*t + \varphi)$ (рис.~\ref{pic:signal_one_tone}) и его спектр (рис.~\ref{pic:signal_one_tone_spec}).
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{signal}
+		\caption{Однотональный сигнал} 
+		\label{pic:signal_one_tone} % название для ссылок внутри кода
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{signal_spec}
+		\caption{Спектр однотонального сигнала} 
+		\label{pic:signal_one_tone_spec} % название для ссылок внутри кода
+	\end{center}
+\end{figure}
+
+
+\subsection{Фазовая модуляция}
+Сигнал после фазовой модуляции приведён на рис.~\ref{pic:phase_mod_sig_carr}. Его спектр показан на рис.~\ref{pic:phase_mod_sig_carr_spec}.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{mod_sig_p}
+		\caption{Фазово-модулированный сигнал} 
+		\label{pic:phase_mod_sig_carr} % название для ссылок внутри кода
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{mod_sig_p_spec}
+		\caption{Спектр фазово-модулированного сигнала} 
+		\label{pic:phase_mod_sig_carr_spec} % название для ссылок внутри кода
+	\end{center}
+\end{figure}
+
+\subsection{Демодуляция фазовой модуляции}
+Демодуляция фазовой модуляции представлена на рис.~\ref{pic:phase_demod_sig}, а спектр демодулированного сигнала на рис.~\ref{pic:phase_demod_sig_spec}.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{demod_sig_p}
+		\caption{Фазово-демодулированный сигнал} 
+		\label{pic:phase_demod_sig} % название для ссылок внутри кода
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{demod_sig_p_spec}
+		\caption{Спектр фазово-демодулированного сигнала} 
+		\label{pic:phase_demod_sig_spec} % название для ссылок внутри кода
+	\end{center}
+\end{figure}
+Как видно по графикам сигнал после демодуляции совпадает с модулируемым исходным сигналом.
+
+\subsection{Частотная модуляция}
+
+Сигнал после частотной модуляции приведён на рис.~\ref{pic:freq_mod_sig}. Его спектр показан на рис.~\ref{pic:freq_mod_sig_spec}.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{mod_sig_f}
+		\caption{Частотно-модулированный сигнал} 
+		\label{pic:freq_mod_sig} % название для ссылок внутри кода
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{mod_sig_f_spec}
+		\caption{Спектр частотно-модулированного сигнала} 
+		\label{pic:freq_mod_sig_spec} % название для ссылок внутри кода
+	\end{center}
+\end{figure}
+
+\subsection{Демодуляция частотной модуляции}
+
+Демодуляция частотной модуляции представлена на рис.~\ref{pic:freq_demod_sig}, а спектр демодулированного сигнала на рис.~\ref{pic:freq_demod_sig_spec}.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{demod_sig_f}
+		\caption{Частотно-демодулированный сигнал} 
+		\label{pic:freq_demod_sig} % название для ссылок внутри кода
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{demod_sig_f_spec}
+		\caption{Спектр частотно-демодулированного сигнала} 
+		\label{pic:freq_demod_sig_spec} % название для ссылок внутри кода
+	\end{center}
+\end{figure}
+Как видно по графикам в сигнале после демодуляции присутствуют незначительные отличия от исходного сигнала.
+
+\section{Выводы}
+
+В данной работе нами были исследованы типы аналоговой модуляции и демодуляции, а именно - фазовая и частотная модуляции и демодуляции. Также были построены спектры этих сигналов. И в случае с фазовой модуляцией и в случае с частотной модуляцией,
+сигналы были демодулированы с хорошей точностью, что говорит об эффективности использования таких методов модуляции и демодуляции. 
+Такие способы модуляции можно применять для высококачественной передачи.
+
+\section{Листинг}
+\lstinputlisting[
+	language = Matlab,
+	label=code:code_1,
+	caption={Код использованный при работе},
+]{lab5.m}
+
+
+\end{document}
