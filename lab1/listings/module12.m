@@ -8,9 +8,9 @@ t1 = 5e-3;
 s = (sawtooth(2*pi*t/T, 1-t1/T) - 1) * A/2;
 g = figure();
 plot(t,s);
-FFT = fft(s);
-s = figure();
-plot(t, FFT)
+s_f = figure();
+spectrum(s',Fs);
+xlim([0,200]);
 
 saveas(g,'../fig/graph9_2','png');
-saveas(s,'../fig/spec9_2','png');
+saveas(s_f,'../fig/spec9_2','png');

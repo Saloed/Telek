@@ -9,9 +9,8 @@ s = (square(2*pi*t*f0, f0*tau*100) + 1) * A/2;
 g = figure();
 plot(t, s)
 ylim([0 5]);
-FFT = fft(s);
-s = figure();
-plot(t(1:61), FFT(1:61))
+s_f = figure();
+spectrum(s',Fs);
 
 saveas(g,'../fig/graph9_1','png');
-saveas(s,'../fig/spec9_1','png');
+saveas(s_f,'../fig/spec9_1','png');

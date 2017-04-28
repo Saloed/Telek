@@ -11,9 +11,10 @@ d(:,2) = 0.6.^(0:5)';
 y = pulstran(t, d, s0, Fs0);
 g = figure();
 plot(t,y)
-FFT = fft(y);
 s = figure();
-plot(t(1:501), FFT(1:501))
+spectrum(y',Fs);
+xlim([0,100]);
+
 
 saveas(g,'../fig/graph8_2','png');
 saveas(s,'../fig/spec8_2','png');

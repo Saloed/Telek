@@ -8,9 +8,9 @@ d(:,2) = 0.8.^(0:4)';
 y = pulstran(t, d, 'tripuls', tau);
 g = figure();
 plot(t,y)
-FFT = fft(y);
 s = figure();
-plot(t(1:501), FFT(1:501))
+spectrum(y',Fs);
+xlim([0,400]);
 
 saveas(g,'../fig/graph8_1','png');
 saveas(s,'../fig/spec8_1','png');

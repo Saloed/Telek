@@ -8,9 +8,10 @@ T2 = 60e-3;
 s = A * (T2*tripuls(t,T2) - T1*tripuls(t,T1))/(T2-T1);
 g = figure();
 plot(t, s);
-FFT = fft(s);
-s = figure();
-plot(t(1:101), FFT(1:101))
+s_f = figure();
+spectrum(s',Fs);
+xlim([0,150]);
+
 
 saveas(g,'../fig/graph5','png');
-saveas(s,'../fig/spec5','png');
+saveas(s_f,'../fig/spec5','png');

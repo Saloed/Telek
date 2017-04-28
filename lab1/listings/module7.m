@@ -1,6 +1,5 @@
 close all
 clc
-
 Fs = 1e3;
 t = -0.1:1/Fs:0.1;
 f0 = 10;

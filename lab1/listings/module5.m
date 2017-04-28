@@ -1,16 +1,16 @@
 close all
 clc
-Fs = 1e3;
-t = -40e-3:1/Fs:40e-3;
+Fs = 3e3;
 T = 20e-3;
 A = 5;
-s = -A * rectpuls(t + T/2, T) + A * rectpuls (t-T/2, T);
+t = -2*T:1/Fs:2*T;
+s = -A * rectpuls(t + T/2, T) + A * rectpuls (t - T/2, T);
 g = figure();
 plot(t, s)
 ylim ([-6 6]);
-FFT = fft(s);
-s = figure();
-plot(t(1:81), FFT(1:81))
+s_f = figure();
+spectrum(s',Fs);
+xlim([0,1000]);
 
 saveas(g,'../fig/graph4','png');
-saveas(s,'../fig/spec4','png');
+saveas(s_f,'../fig/spec4','png');
