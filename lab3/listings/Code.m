@@ -11,12 +11,13 @@ plot(t,signal);
 
 Fn2 = 100;
 signal = signal + cos(2*pi*Fn2.*t);
-signal_f = fft(signal);
 
 signal_2_g = figure();
 plot(t,signal);
+
 signal_2_fft_g = figure();
-plot(1./t,abs(signal_f));
+spectrum(signal, Fd, 200);
+
 
 Hd = fdesign.lowpass('Fp,Fst,Ap,Ast',50,60,1,10,Fd);
 d = design(Hd,'equiripple');
@@ -24,12 +25,11 @@ d = design(Hd,'equiripple');
 %fvtool(d)
 
 y_signal = filter (d, signal);
-y_signal_f = fft(y_signal);
 
 filtered_g = figure();
 plot(t, y_signal);
 filtered_fft_g = figure();
-plot(1./t, abs(y_signal_f));
+spectrum(y_signal,Fd, 200);
 
 saveas(signal_1_g,'../fig/signal1','png')
 saveas(signal_2_g,'../fig/signal2','png')
